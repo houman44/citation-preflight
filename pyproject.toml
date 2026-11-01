@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "citation-preflight"
+version = "0.1.0"
+description = "Deterministic pre-flight gate for case citations in AI-drafted legal filings"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Houman Azimi (Barg Labs)" }]
+dependencies = []  # stdlib only; eyecite is optional (regex fallback without it)
+
+[project.optional-dependencies]
+eyecite = ["eyecite>=2.7"]
+dev = ["pytest>=7"]
+
+[project.scripts]
+preflight = "citation_preflight.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"citation_preflight.fixtures" = ["*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

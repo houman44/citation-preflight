@@ -1,0 +1,54 @@
+{
+  "_synthetic": true,
+  "_about": "SYNTHETIC fixtures, hand-written in the per-citation format documented for CourtListener's Citation Lookup API v4 (https://wiki.free.law/c/courtlistener/help/api/rest/v4/citation-lookup). They are NOT CourtListener responses. Real cluster objects carry many more fields; only case_name, case_name_short, case_name_full, date_filed and absolute_url are included here. case_name and date_filed reflect each decision's public name and decision date. absolute_url values are the paths courtlistener.com redirected to for these citations when checked on 2026-10-31. For 925 F.3d 1339, courtlistener.com's public citation page returned 404 on 2026-10-31. start_index/end_index are filled in at lookup time from the local extractor. Run `preflight check --live` with COURTLISTENER_TOKEN for real lookups.",
+  "lookups": {
+    "347 U.S. 483": {
+      "normalized_citations": ["347 U.S. 483"],
+      "status": 200,
+      "error_message": "",
+      "clusters": [
+        {
+          "case_name": "Brown v. Board of Education",
+          "case_name_short": "Brown",
+          "case_name_full": "",
+          "date_filed": "1954-05-17",
+          "absolute_url": "/opinion/105221/brown-v-board-of-education/"
+        }
+      ]
+    },
+    "384 U.S. 436": {
+      "normalized_citations": ["384 U.S. 436"],
+      "status": 200,
+      "error_message": "",
+      "clusters": [
+        {
+          "case_name": "Miranda v. Arizona",
+          "case_name_short": "Miranda",
+          "case_name_full": "",
+          "date_filed": "1966-06-13",
+          "absolute_url": "/opinion/107252/miranda-v-arizona/"
+        }
+      ]
+    },
+    "550 U.S. 544": {
+      "normalized_citations": ["550 U.S. 544"],
+      "status": 200,
+      "error_message": "",
+      "clusters": [
+        {
+          "case_name": "Bell Atlantic Corp. v. Twombly",
+          "case_name_short": "Twombly",
+          "case_name_full": "",
+          "date_filed": "2007-05-21",
+          "absolute_url": "/opinion/145730/bell-atlantic-corp-v-twombly/"
+        }
+      ]
+    },
+    "925 F.3d 1339": {
+      "normalized_citations": ["925 F.3d 1339"],
+      "status": 404,
+      "error_message": "Citation not found: '925 F.3d 1339'",
+      "clusters": []
+    }
+  }
+}

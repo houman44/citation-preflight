@@ -1,0 +1,347 @@
+{
+  "certificate": {
+    "format": "citation-preflight/certificate/v1",
+    "tool": {
+      "name": "citation-preflight",
+      "version": "0.1.0"
+    },
+    "rules": {
+      "version": "1.0.0",
+      "text": {
+        "R0": "Only full case-law citations are checked; other forms are listed as NOT CHECKED.",
+        "R1": "Citation must resolve in the case-law database (404 => FAIL).",
+        "R2": "Citation must resolve to exactly one case (several => WARN).",
+        "R3": "Normalize both names (lower-case, strip punctuation and accents, '&'->'and', drop stop-tokens). If both have two parties ('X v. Y'), MATCH iff each party in the brief shares >=1 significant token with the corresponding resolved party (or with the opposite party, for names reversed on appeal). Otherwise MATCH iff overlap coefficient |B∩R|/min(|B|,|R|) >= 0.5. Mismatch => FAIL.",
+        "R4": "Year in brief must equal year of date_filed; off by 1 => WARN; more => FAIL."
+      }
+    },
+    "extractor": {
+      "name": "eyecite",
+      "version": "2.7.8"
+    },
+    "resolver": {
+      "name": "fixture",
+      "synthetic": true,
+      "source": "synthetic_courtlistener_lookups.json",
+      "source_sha256": "34bd1949b29f895f3052e96049b004fe8aa0e5fe7eebee3a7d7e88629476d575"
+    },
+    "input": {
+      "sha256": "bdbeeb29c5be3b3ffa05edc6d35486312acf158267facefdfa9c25ae41a62c62",
+      "bytes": 892,
+      "chars": 891
+    },
+    "overall": {
+      "verdict": "BLOCK",
+      "reason": "At least one citation failed a check. Do not file until fixed.",
+      "counts": {
+        "PASS": 2,
+        "FAIL": 2,
+        "WARN": 0,
+        "NOT CHECKED": 2
+      }
+    },
+    "citations": [
+      {
+        "id": "C1",
+        "kind": "case",
+        "text": "550 U.S. 544",
+        "span": [
+          356,
+          368
+        ],
+        "parsed": {
+          "key": "550 U.S. 544",
+          "volume": "550",
+          "reporter": "U.S.",
+          "reporter_normalized": "U.S.",
+          "page": "544",
+          "pin_cite": "570",
+          "case_name_in_brief": "Ashcroft v. Iqbal",
+          "year_in_brief": 2009
+        },
+        "extraction_notes": [
+          "extractor reported year 2019; using year from the adjacent parenthetical (2009)"
+        ],
+        "lookup": {
+          "status": 200,
+          "error_message": "",
+          "normalized_citations": [
+            "550 U.S. 544"
+          ],
+          "candidates": [
+            {
+              "case_name": "Bell Atlantic Corp. v. Twombly",
+              "case_name_full": "",
+              "date_filed": "2007-05-21",
+              "absolute_url": "/opinion/145730/bell-atlantic-corp-v-twombly/"
+            }
+          ]
+        },
+        "checks": [
+          {
+            "rule": "R1",
+            "check": "resolves",
+            "result": "PASS",
+            "evidence": "Found (status 200, 1 case)."
+          },
+          {
+            "rule": "R2",
+            "check": "unambiguous",
+            "result": "PASS",
+            "evidence": "Matches exactly one case."
+          },
+          {
+            "rule": "R3",
+            "check": "case name",
+            "result": "FAIL",
+            "evidence": "Brief says “Ashcroft v. Iqbal” but 550 U.S. 544 is “Bell Atlantic Corp. v. Twombly” (first party shares nothing, second party shares nothing)."
+          },
+          {
+            "rule": "R4",
+            "check": "year",
+            "result": "FAIL",
+            "evidence": "Brief says 2009; date_filed 2007-05-21 (off by 2 years)."
+          }
+        ],
+        "verdict": "FAIL"
+      },
+      {
+        "id": "C2",
+        "kind": "id",
+        "text": "Id. at 556",
+        "span": [
+          382,
+          392
+        ],
+        "parsed": {
+          "key": null,
+          "volume": null,
+          "reporter": null,
+          "reporter_normalized": null,
+          "page": null,
+          "pin_cite": null,
+          "case_name_in_brief": null,
+          "year_in_brief": null
+        },
+        "extraction_notes": [],
+        "lookup": null,
+        "checks": [
+          {
+            "rule": "R0",
+            "check": "supported form",
+            "result": "NOT CHECKED",
+            "evidence": "'Id.' reference; points to the previous authority and is not looked up."
+          }
+        ],
+        "verdict": "NOT CHECKED"
+      },
+      {
+        "id": "C3",
+        "kind": "case",
+        "text": "925 F.3d 1339",
+        "span": [
+          574,
+          587
+        ],
+        "parsed": {
+          "key": "925 F.3d 1339",
+          "volume": "925",
+          "reporter": "F.3d",
+          "reporter_normalized": "F.3d",
+          "page": "1339",
+          "pin_cite": null,
+          "case_name_in_brief": "Varghese v. China Southern Airlines Co.",
+          "year_in_brief": 2019
+        },
+        "extraction_notes": [],
+        "lookup": {
+          "status": 404,
+          "error_message": "Citation not found: '925 F.3d 1339'",
+          "normalized_citations": [
+            "925 F.3d 1339"
+          ],
+          "candidates": []
+        },
+        "checks": [
+          {
+            "rule": "R1",
+            "check": "resolves",
+            "result": "FAIL",
+            "evidence": "No such citation: the database has no case at this volume/reporter/page (status 404: Citation not found: '925 F.3d 1339')."
+          },
+          {
+            "rule": "R3",
+            "check": "case name",
+            "result": "NOT CHECKED",
+            "evidence": "Not compared: the citation did not resolve to a case."
+          },
+          {
+            "rule": "R4",
+            "check": "year",
+            "result": "NOT CHECKED",
+            "evidence": "Not compared: the citation did not resolve to a case."
+          }
+        ],
+        "verdict": "FAIL"
+      },
+      {
+        "id": "C4",
+        "kind": "case",
+        "text": "347 U.S. 483",
+        "span": [
+          781,
+          793
+        ],
+        "parsed": {
+          "key": "347 U.S. 483",
+          "volume": "347",
+          "reporter": "U.S.",
+          "reporter_normalized": "U.S.",
+          "page": "483",
+          "pin_cite": null,
+          "case_name_in_brief": "Brown v. Board of Education",
+          "year_in_brief": 1954
+        },
+        "extraction_notes": [],
+        "lookup": {
+          "status": 200,
+          "error_message": "",
+          "normalized_citations": [
+            "347 U.S. 483"
+          ],
+          "candidates": [
+            {
+              "case_name": "Brown v. Board of Education",
+              "case_name_full": "",
+              "date_filed": "1954-05-17",
+              "absolute_url": "/opinion/105221/brown-v-board-of-education/"
+            }
+          ]
+        },
+        "checks": [
+          {
+            "rule": "R1",
+            "check": "resolves",
+            "result": "PASS",
+            "evidence": "Found (status 200, 1 case)."
+          },
+          {
+            "rule": "R2",
+            "check": "unambiguous",
+            "result": "PASS",
+            "evidence": "Matches exactly one case."
+          },
+          {
+            "rule": "R3",
+            "check": "case name",
+            "result": "PASS",
+            "evidence": "“Brown v. Board of Education” matches “Brown v. Board of Education” (shared tokens: first party ['brown'], second party ['board', 'education'])"
+          },
+          {
+            "rule": "R4",
+            "check": "year",
+            "result": "PASS",
+            "evidence": "Brief says 1954; date_filed 1954-05-17."
+          }
+        ],
+        "verdict": "PASS"
+      },
+      {
+        "id": "C5",
+        "kind": "case",
+        "text": "384 U.S. 436",
+        "span": [
+          822,
+          834
+        ],
+        "parsed": {
+          "key": "384 U.S. 436",
+          "volume": "384",
+          "reporter": "U.S.",
+          "reporter_normalized": "U.S.",
+          "page": "436",
+          "pin_cite": null,
+          "case_name_in_brief": "Miranda v. Arizona",
+          "year_in_brief": 1966
+        },
+        "extraction_notes": [],
+        "lookup": {
+          "status": 200,
+          "error_message": "",
+          "normalized_citations": [
+            "384 U.S. 436"
+          ],
+          "candidates": [
+            {
+              "case_name": "Miranda v. Arizona",
+              "case_name_full": "",
+              "date_filed": "1966-06-13",
+              "absolute_url": "/opinion/107252/miranda-v-arizona/"
+            }
+          ]
+        },
+        "checks": [
+          {
+            "rule": "R1",
+            "check": "resolves",
+            "result": "PASS",
+            "evidence": "Found (status 200, 1 case)."
+          },
+          {
+            "rule": "R2",
+            "check": "unambiguous",
+            "result": "PASS",
+            "evidence": "Matches exactly one case."
+          },
+          {
+            "rule": "R3",
+            "check": "case name",
+            "result": "PASS",
+            "evidence": "“Miranda v. Arizona” matches “Miranda v. Arizona” (shared tokens: first party ['miranda'], second party ['arizona'])"
+          },
+          {
+            "rule": "R4",
+            "check": "year",
+            "result": "PASS",
+            "evidence": "Brief says 1966; date_filed 1966-06-13."
+          }
+        ],
+        "verdict": "PASS"
+      },
+      {
+        "id": "C6",
+        "kind": "statute",
+        "text": "42 U.S.C. § 1983",
+        "span": [
+          854,
+          870
+        ],
+        "parsed": {
+          "key": null,
+          "volume": null,
+          "reporter": null,
+          "reporter_normalized": null,
+          "page": null,
+          "pin_cite": null,
+          "case_name_in_brief": null,
+          "year_in_brief": null
+        },
+        "extraction_notes": [],
+        "lookup": null,
+        "checks": [
+          {
+            "rule": "R0",
+            "check": "supported form",
+            "result": "NOT CHECKED",
+            "evidence": "Statute or regulation; this tool checks case law only."
+          }
+        ],
+        "verdict": "NOT CHECKED"
+      }
+    ]
+  },
+  "certificate_sha256": "73a9171b80eb63976bc53651119bce76a6e67cc0d1dbb2b5501ff37f82a53549",
+  "generated_at": "2026-11-01T01:06:41Z",
+  "input_path": "demo/brief_ai_draft.txt",
+  "note": "certificate_sha256 = SHA-256 of the canonical JSON of `certificate` (sorted keys, compact separators, UTF-8). generated_at and input_path are not hashed. Checksummed and reproducible; not cryptographically signed."
+}

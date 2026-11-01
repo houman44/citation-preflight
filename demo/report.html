@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Citation Pre-flight Report</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f4f5f7;color:#1c2330;font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 24px 40px}
+h1{font-size:18px;margin:0 0 2px;font-weight:650;letter-spacing:-.01em}
+.sub{color:#5b6475;font-size:13px;margin:0 0 18px}
+.banner{border-radius:10px;padding:18px 22px;display:flex;align-items:center;margin-bottom:14px;color:#fff}
+.banner .v{margin-right:20px;font-size:30px;font-weight:800;letter-spacing:.04em}
+.banner .r{font-size:15px;opacity:.95}
+.banner .c{margin-left:auto;padding-left:20px;font-size:13px;text-align:right;opacity:.95;white-space:nowrap}
+.BLOCK{background:#b42318}.REVIEW{background:#b54708}.PASS{background:#067647}
+.notice{background:#fff7e6;border:1px solid #f5c26b;color:#6b4300;border-radius:8px;padding:9px 14px;margin-bottom:14px;font-size:13px}
+table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid #dfe3ea;border-radius:10px;overflow:hidden}
+th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#5b6475;background:#f8f9fb;padding:9px 12px;border-bottom:1px solid #dfe3ea}
+td{vertical-align:top;padding:11px 12px;border-bottom:1px solid #edf0f4}
+tr:last-child>td{border-bottom:0}
+.cite{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;white-space:nowrap}
+.muted{color:#7a8394}
+.pill{display:inline-block;border-radius:999px;padding:2px 9px;font-size:11px;font-weight:700;letter-spacing:.03em;white-space:nowrap}
+.p-PASS{background:#dcfae6;color:#085d3a}.p-FAIL{background:#fee4e2;color:#912018}
+.p-WARN{background:#fef0c7;color:#93370d}.p-NC{background:#eaecf0;color:#344054}
+table.checks{border:0;border-radius:0;background:transparent;width:100%}
+table.checks td{padding:0 0 6px;border:0;vertical-align:baseline}
+table.checks td.k{width:100px;color:#5b6475;font-size:12px;padding-right:8px;white-space:nowrap}
+table.checks td.r{width:104px;padding-right:10px}
+table.checks .pill{display:block;text-align:center}
+table.checks td.e{font-size:12.5px}
+tr.row-FAIL>td:first-child{box-shadow:inset 4px 0 0 #d92d20}
+tr.row-WARN>td:first-child{box-shadow:inset 4px 0 0 #f79009}
+tr.row-NC>td:first-child{box-shadow:inset 4px 0 0 #98a2b3}
+tr.row-PASS>td:first-child{box-shadow:inset 4px 0 0 #17b26a}
+table.meta{margin-top:16px;font-size:12.5px}
+table.meta td{padding:6px 14px;border-bottom:1px solid #edf0f4}
+table.meta td:first-child{width:190px;color:#5b6475;white-space:nowrap}
+.h{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;word-break:break-all}
+.foot{margin-top:14px;color:#5b6475;font-size:12px}
+</style></head>
+<body><div class="wrap">
+<h1>Citation Pre-flight</h1>
+<p class="sub">Deterministic pre-filing check of case citations · demo/brief_ai_draft.txt</p>
+<div class="banner BLOCK"><div class="v">BLOCK</div>
+<div class="r">At least one citation failed a check. Do not file until fixed.</div><div class="c">2 FAIL · 0 WARN · 2 NOT CHECKED · 2 PASS</div></div>
+<div class="notice"><b>Offline demo:</b> lookups come from SYNTHETIC fixtures written in CourtListener's documented response format, not from a live database. Run with <code>--live</code> and a CourtListener token for real lookups.</div>
+<table><thead><tr><th>#</th><th>Citation</th><th>Brief says</th><th>Database says</th><th>Checks and evidence</th><th>Verdict</th></tr></thead>
+<tbody><tr class="row-FAIL"><td class="muted">C1</td><td class="cite">550 U.S. 544</td><td>Ashcroft v. Iqbal <span class="muted">(2009)</span></td><td>Bell Atlantic Corp. v. Twombly <span class="muted">(2007-05-21)</span></td><td><table class="checks"><tr><td class="k">resolves</td><td class="r"><span class="pill p-PASS">PASS</span></td><td class="e">Found (status 200, 1 case).</td></tr><tr><td class="k">unambiguous</td><td class="r"><span class="pill p-PASS">PASS</span></td><td class="e">Matches exactly one case.</td></tr><tr><td class="k">case name</td><td class="r"><span class="pill p-FAIL">FAIL</span></td><td class="e">Brief says “Ashcroft v. Iqbal” but 550 U.S. 544 is “Bell Atlantic Corp. v. Twombly” (first party shares nothing, second party shares nothing).</td></tr><tr><td class="k">year</td><td class="r"><span class="pill p-FAIL">FAIL</span></td><td class="e">Brief says 2009; date_filed 2007-05-21 (off by 2 years).</td></tr><tr><td class="k">note</td><td class="r"></td><td class="e muted">extractor reported year 2019; using year from the adjacent parenthetical (2009)</td></tr></table></td><td><span class="pill p-FAIL">FAIL</span></td></tr><tr class="row-NC"><td class="muted">C2</td><td class="cite">Id. at 556</td><td><span class="muted">—</span></td><td><span class="muted">—</span></td><td><table class="checks"><tr><td class="k">supported form</td><td class="r"><span class="pill p-NC">NOT CHECKED</span></td><td class="e">&#x27;Id.&#x27; reference; points to the previous authority and is not looked up.</td></tr></table></td><td><span class="pill p-NC">NOT CHECKED</span></td></tr><tr class="row-FAIL"><td class="muted">C3</td><td class="cite">925 F.3d 1339</td><td>Varghese v. China Southern Airlines Co. <span class="muted">(2019)</span></td><td><span class="muted">status 404: no case</span></td><td><table class="checks"><tr><td class="k">resolves</td><td class="r"><span class="pill p-FAIL">FAIL</span></td><td class="e">No such citation: the database has no case at this volume/reporter/page (status 404: Citation not found: &#x27;925 F.3d 1339&#x27;).</td></tr><tr><td class="k">case name</td><td class="r"><span class="pill p-NC">NOT CHECKED</span></td><td class="e">Not compared: the citation did not resolve to a case.</td></tr><tr><td class="k">year</td><td class="r"><span class="pill p-NC">NOT CHECKED</span></td><td class="e">Not compared: the citation did not resolve to a case.</td></tr></table></td><td><span class="pill p-FAIL">FAIL</span></td></tr><tr class="row-PASS"><td class="muted">C4</td><td class="cite">347 U.S. 483</td><td>Brown v. Board of Education <span class="muted">(1954)</span></td><td>Brown v. Board of Education <span class="muted">(1954-05-17)</span></td><td><table class="checks"><tr><td class="k">resolves</td><td class="r"><span class="pill p-PASS">PASS</span></td><td class="e">Found (status 200, 1 case).</td></tr><tr><td class="k">unambiguous</td><td class="r"><span class="pill p-PASS">PASS</span></td><td class="e">Matches exactly one case.</td></tr><tr><td class="k">case name</td><td class="r"><span class="pill p-PASS">PASS</span></td><td class="e">“Brown v. Board of Education” matches “Brown v. Board of Education” (shared tokens: first party [&#x27;brown&#x27;], second party [&#x27;board&#x27;, &#x27;education&#x27;])</td></tr><tr><td class="k">year</td><td class="r"><span class="pill p-PASS">PASS</span></td><td class="e">Brief says 1954; date_filed 1954-05-17.</td></tr></table></td><td><span class="pill p-PASS">PASS</span></td></tr><tr class="row-PASS"><td class="muted">C5</td><td class="cite">384 U.S. 436</td><td>Miranda v. Arizona <span class="muted">(1966)</span></td><td>Miranda v. Arizona <span class="muted">(1966-06-13)</span></td><td><table class="checks"><tr><td class="k">resolves</td><td class="r"><span class="pill p-PASS">PASS</span></td><td class="e">Found (status 200, 1 case).</td></tr><tr><td class="k">unambiguous</td><td class="r"><span class="pill p-PASS">PASS</span></td><td class="e">Matches exactly one case.</td></tr><tr><td class="k">case name</td><td class="r"><span class="pill p-PASS">PASS</span></td><td class="e">“Miranda v. Arizona” matches “Miranda v. Arizona” (shared tokens: first party [&#x27;miranda&#x27;], second party [&#x27;arizona&#x27;])</td></tr><tr><td class="k">year</td><td class="r"><span class="pill p-PASS">PASS</span></td><td class="e">Brief says 1966; date_filed 1966-06-13.</td></tr></table></td><td><span class="pill p-PASS">PASS</span></td></tr><tr class="row-NC"><td class="muted">C6</td><td class="cite">42 U.S.C. § 1983</td><td><span class="muted">—</span></td><td><span class="muted">—</span></td><td><table class="checks"><tr><td class="k">supported form</td><td class="r"><span class="pill p-NC">NOT CHECKED</span></td><td class="e">Statute or regulation; this tool checks case law only.</td></tr></table></td><td><span class="pill p-NC">NOT CHECKED</span></td></tr></tbody></table>
+<table class="meta">
+<tr><td>Input SHA-256</td><td class="h">bdbeeb29c5be3b3ffa05edc6d35486312acf158267facefdfa9c25ae41a62c62</td></tr>
+<tr><td>Certificate SHA-256</td><td class="h">73a9171b80eb63976bc53651119bce76a6e67cc0d1dbb2b5501ff37f82a53549</td></tr>
+<tr><td>Tool / rules</td><td>citation-preflight 0.1.0 · rules 1.0.0</td></tr>
+<tr><td>Extractor</td><td>eyecite 2.7.8</td></tr>
+<tr><td>Resolver</td><td>fixture file synthetic_courtlistener_lookups.json (synthetic), sha256 34bd1949b29f895f3052e96049b004fe8aa0e5fe7eebee3a7d7e88629476d575</td></tr>
+<tr><td>Generated (not hashed)</td><td>2026-11-01T01:06:41Z</td></tr>
+</table>
+<p class="foot">Checks whether each case citation exists and whether the name and year in the brief match the record.
+It does not judge whether a case supports the proposition it is cited for. Checksummed and reproducible; not cryptographically signed.
+Independent prototype by Houman Azimi (Barg Labs). Not affiliated with or endorsed by Clio.</p>
+</div></body></html>

@@ -1,0 +1,59 @@
+$ preflight check demo/brief_ai_draft.txt --out demo/report.json --html demo/report.html
+
+Citation Pre-flight 0.1.0  rules 1.0.0  extractor eyecite 2.7.8
+Resolver: fixtures synthetic_courtlistener_lookups.json (SYNTHETIC; use --live for real lookups)
+Input:    demo/brief_ai_draft.txt  sha256 bdbeeb29c5be3b3ffa05edc6d35486312acf158267facefdfa9c25ae41a62c62
+
+C1  [FAIL]        550 U.S. 544  “Ashcroft v. Iqbal” (2009)
+    resolves       PASS        Found (status 200, 1 case).
+    unambiguous    PASS        Matches exactly one case.
+    case name      FAIL        Brief says “Ashcroft v. Iqbal” but 550 U.S. 544 is “Bell Atlantic
+                               Corp. v. Twombly” (first party shares nothing, second party shares
+                               nothing).
+    year           FAIL        Brief says 2009; date_filed 2007-05-21 (off by 2 years).
+    note                       extractor reported year 2019; using year from the adjacent
+                               parenthetical (2009)
+
+C2  [NOT CHECKED] Id. at 556
+    supported form NOT CHECKED 'Id.' reference; points to the previous authority and is not
+                               looked up.
+
+C3  [FAIL]        925 F.3d 1339  “Varghese v. China Southern Airlines Co.” (2019)
+    resolves       FAIL        No such citation: the database has no case at this
+                               volume/reporter/page (status 404: Citation not found: '925 F.3d
+                               1339').
+    case name      NOT CHECKED Not compared: the citation did not resolve to a case.
+    year           NOT CHECKED Not compared: the citation did not resolve to a case.
+
+C4  [PASS]        347 U.S. 483  “Brown v. Board of Education” (1954)
+    resolves       PASS        Found (status 200, 1 case).
+    unambiguous    PASS        Matches exactly one case.
+    case name      PASS        “Brown v. Board of Education” matches “Brown v. Board of
+                               Education” (shared tokens: first party ['brown'], second party
+                               ['board', 'education'])
+    year           PASS        Brief says 1954; date_filed 1954-05-17.
+
+C5  [PASS]        384 U.S. 436  “Miranda v. Arizona” (1966)
+    resolves       PASS        Found (status 200, 1 case).
+    unambiguous    PASS        Matches exactly one case.
+    case name      PASS        “Miranda v. Arizona” matches “Miranda v. Arizona” (shared tokens:
+                               first party ['miranda'], second party ['arizona'])
+    year           PASS        Brief says 1966; date_filed 1966-06-13.
+
+C6  [NOT CHECKED] 42 U.S.C. § 1983
+    supported form NOT CHECKED Statute or regulation; this tool checks case law only.
+
+OVERALL: BLOCK  (2 FAIL, 0 WARN, 2 NOT CHECKED, 2 PASS)
+         At least one citation failed a check. Do not file until fixed.
+Certificate sha256: 73a9171b80eb63976bc53651119bce76a6e67cc0d1dbb2b5501ff37f82a53549
+Wrote demo/report.json, demo/report.html
+
+exit code: 1   (0 PASS, 1 BLOCK, 3 REVIEW, 4 error)
+
+--- Re-run on the same input and fixtures ---
+run 1 certificate sha256: 73a9171b80eb63976bc53651119bce76a6e67cc0d1dbb2b5501ff37f82a53549
+run 2 certificate sha256: 73a9171b80eb63976bc53651119bce76a6e67cc0d1dbb2b5501ff37f82a53549
+IDENTICAL: same input + same data => same certificate
+
+$ preflight verify demo/report.json
+OK  certificate_sha256 73a9171b80eb63976bc53651119bce76a6e67cc0d1dbb2b5501ff37f82a53549 matches the certificate body
